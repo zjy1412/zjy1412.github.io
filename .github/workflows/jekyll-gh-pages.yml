@@ -38,7 +38,8 @@ jobs:
   #     - name: Upload artifact
   #       uses: actions/upload-pages-artifact@v2
 
-  build:
+  # Build job for Markdown (Jekyll)
+  build-markdown:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -55,9 +56,32 @@ jobs:
         run: bundle exec jekyll build
         with:
           source: ./
-          destination: ./_site
-      - name: Upload artifact
+          destination: ./_site_markdown
+      - name: Upload Markdown artifact
         uses: actions/upload-pages-artifact@v2
+        with:
+          name: markdown-site
+          path: ./_site_markdown
+
+  # Build job for Typst
+  build-typst:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Typst
+        run: |
+          # 假设 Typst 有一个安装脚本或可以通过包管理器安装
+          curl -sSL https://typst.dev/install.sh | sh
+      - name: Build with Typst
+        run: |
+          # 假设 Typst 使用 typst build 命令
+          typst build ./path/to/typst/files -o ./_site_typst
+      - name: Upload Typst artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          name: typst-site
+          path: ./_site_typst
 
   # Deployment job
   deploy:
@@ -65,8 +89,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build-markdown, build-typst]
     steps:
+      - name: Download Markdown artifact
+        uses: actions/download-pages-artifact@v2
+        with:
+          name: markdown-site
+          path: ./_site
+      - name: Download Typst artifact
+        uses: actions/download-pages-artifact@v2
+        with:
+          name: typst-site
+          path: ./_site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
