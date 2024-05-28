@@ -9,7 +9,12 @@ author: zjy1412
 * content
 {:toc}
 
-一直都想搭个写博客的网站，但是学了一圈html，css和javascript，到头来还是被繁杂的工作量劝退了。~~（就是懒）~~ 转头一想，既然决定用github搭，为什么不找已经做好的开源的网站呢？所以我找到一个比较简洁的[博客网站](https://github.com/Gaohaoyang/gaohaoyang.github.io)。
+一直都想搭个写博客的网站，但是学了一圈html，css和javascript，到头来还是被繁杂的工作量劝退了。~~（就是懒）~~ 转头一想，既然决定用github搭，为什么不找已经做好的开源的网站呢？
+
+
+
+
+所以我找到一个比较简洁的[博客网站](https://github.com/Gaohaoyang/gaohaoyang.github.io)。
 
 <!-- ![index](http://ww3.sinaimg.cn/large/7011d6cfjw1f3bdli86awj211k0oyqen.jpg) -->
 
